@@ -1,0 +1,43 @@
+<div class="p-8 max-w-md mx-auto bg-white rounded-xl shadow-lg">
+	<h1 class="text-3xl font-bold mb-8 text-gray-800 text-center">
+		{{ isEdit ? 'Edit Contact' : 'New Contact' }}
+	</h1>
+	<form [formGroup]="form" (ngSubmit)="save()" class="space-y-6">
+		<div>
+			<label class="block text-sm font-medium text-gray-700 mb-2">Name</label>
+			<input formControlName="name" class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 
+             {{ form.get('name')?.invalid && form.get('name')?.touched ? 'border-red-500' : 'border-gray-300' }}"
+				placeholder="John Doe">
+			@if (form.get('name')?.invalid && form.get('name')?.touched) {
+			<p class="text-red-500 text-sm mt-1">Name required</p>
+			}
+		</div>
+		<div>
+			<label class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+			<input formControlName="email" type="email" class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 
+             {{ form.get('email')?.invalid && form.get('email')?.touched ? 'border-red-500' : 'border-gray-300' }}"
+				placeholder="john@test.com">
+			@if (form.get('email')?.invalid && form.get('email')?.touched) {
+			<p class="text-red-500 text-sm mt-1">
+				{{ form.get('email')?.errors?.['email'] ? 'Invalid email' : 'Email required' }}</p>
+			}
+		</div>
+		<div>
+			<label class="block text-sm font-medium text-gray-700 mb-2">Phone</label>
+			<input formControlName="phone" class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 
+             {{ form.get('phone')?.invalid && form.get('phone')?.touched ? 'border-red-500' : 'border-gray-300' }}"
+				placeholder="123-456-7890">
+			@if (form.get('phone')?.invalid && form.get('phone')?.touched) {
+			<p class="text-red-500 text-sm mt-1">Phone required</p>
+			}
+		</div>
+		<div class="flex space-x-4 pt-4">
+			<button type="submit" [disabled]="form.invalid"
+				class="flex-1 bg-blue-500 text-white py-3 px-6 rounded-lg hover:bg-blue-600 disabled:bg-gray-400 font-medium transition">
+				{{ isEdit ? 'Update' : 'Create' }}
+			</button>
+			<a routerLink="/contacts"
+				class="flex-1 text-center py-3 px-6 border border-gray-300 rounded-lg hover:bg-gray-50 font-medium transition">Cancel</a>
+		</div>
+	</form>
+</div>

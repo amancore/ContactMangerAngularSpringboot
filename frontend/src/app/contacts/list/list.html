@@ -1,0 +1,22 @@
+<div class="p-8 max-w-4xl mx-auto">
+	<h1 class="text-3xl font-bold mb-6 text-gray-800">Contacts</h1>
+	<a routerLink="/contacts/new"
+		class="bg-green-500 text-white px-6 py-2 rounded-lg hover:bg-green-600 mb-6 inline-block transition">+ Add
+		Contact</a>
+	<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+		@for (contact of contacts(); track contact.id) {
+		<div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition border border-gray-100">
+			<h3 class="font-bold text-xl mb-2 text-gray-800">{{contact.name}}</h3>
+			<p class="text-gray-600 mb-1">{{contact.email}}</p>
+			<p class="text-gray-600 mb-4">{{contact.phone}}</p>
+			<div class="flex space-x-3">
+				<a [routerLink]="['/contacts', contact.id, 'edit']"
+					class="text-blue-700 font-medium">Edit</a>
+				<button (click)="delete(contact.id)" class="text-red-700 font-medium">Delete</button>
+			</div>
+		</div>
+		} @empty {
+		<p class="text-gray-500 text-center col-span-full py-8">No contacts. Add one!</p>
+		}
+	</div>
+</div>
